@@ -1,0 +1,38 @@
+# Dataset
+dataset:
+  name: demo
+  batch_size: 128
+  num_workers: 0
+
+# SMPLify
+SMPLify3D:
+  lr: 0.01 # learning rate (default: 1e-2)
+  adam_betas: [0.9, 0.999] # coefficients used for computing running averages of gradient and its square
+  num_gaussians: 8
+  dot_product_threshold: -1
+  joint_confidence: 0.6
+
+  scaling_optimization:
+    iterations: 20
+    loss_sigma: 100
+    shape_prior_weight: 17.5
+  mesh_optimization:
+    iterations: 50
+    loss_sigma: 100
+    pose_prior_weight: 3
+    angle_prior_weight: 1
+    shape_prior_weight: 17.5
+    point_cloud_weight: 600
+    angle_deviation_weight: 135
+  image_alignment:
+    iterations: 20
+    loss_sigma: 50
+    point_cloud_weight: 1500
+
+# Evaluation
+metrics:
+  align_root: True
+
+# Save results
+save:
+  every_n_batches: 3

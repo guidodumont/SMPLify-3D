@@ -1,0 +1,6 @@
+[submodule "third_party/cliff"]
+	path = third_party/cliff
+	url = git@github.com:haofanwang/CLIFF.git
+[submodule "third_party/mmpose"]
+	path = third_party/mmpose
+	url = git@github.com:open-mmlab/mmpose.git

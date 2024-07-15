@@ -1,0 +1,40 @@
+# Dataset
+dataset:
+  name: SLOPER4D
+  sequence: seq009_running_002
+  batch_size: 128
+  num_workers: 0
+
+# SMPLify
+SMPLify3D:
+  lr: 0.01 # learning rate (default: 1e-2)
+  adam_betas: [0.9, 0.999] # coefficients used for computing running averages of gradient and its square
+  num_gaussians: 8
+  dot_product_threshold: 0.2
+  joint_confidence: 0.75
+
+  scaling_optimization:
+    iterations: 20
+    loss_sigma: 200
+    shape_prior_weight: 1
+  mesh_optimization:
+    iterations: 50
+    loss_sigma: 200
+    pose_prior_weight: 0.75
+    angle_prior_weight: 8.5
+    shape_prior_weight: 1
+    point_cloud_weight: 500
+    angle_deviation_weight: 55
+  image_alignment:
+    iterations: 20
+    loss_sigma: 100
+    shape_prior_weight: 1
+    point_cloud_weight: 500
+
+# Evaluation
+metrics:
+  align_root: True
+
+# Save results
+save:
+  every_n_batches: 3

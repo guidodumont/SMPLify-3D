@@ -1,0 +1,12 @@
+.idea/
+__pycache__/
+data/
+outputs/
+
+models/parametric_body_models/smpl/gmm_08.pkl
+models/parametric_body_models/smpl/J_regressor_extra.npy
+models/parametric_body_models/smpl/J_regressor_h36m.npy
+models/parametric_body_models/smpl/SMPL_FEMALE.pkl
+models/parametric_body_models/smpl/SMPL_MALE.pkl
+models/parametric_body_models/smpl/SMPL_NEUTRAL.pkl
+models/parametric_body_models/smpl/smpl_mean_params.npz
