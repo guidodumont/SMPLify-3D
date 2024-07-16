@@ -50,6 +50,7 @@ SMPLify-3D/
     │   ├── parametric_body_models/
     │   │   └── smpl
     │   │       ├── gmm_08.pkl # Copy from third_party/cliff/data
+    │   │       ├── J_regressor_coco.npy 
     │   │       ├── J_regressor_extra.npy # Copy from third_party/cliff/data
     │   │       ├── J_regressor_h36m.npy # Copy from third_party/cliff/data
     │   │       ├── J_regressor_humanm3.npy
