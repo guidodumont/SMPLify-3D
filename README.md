@@ -1,5 +1,5 @@
 # SMPLify-3D
-Thesis: 
+*Thesis:* [Improving image-based 3D Human Mesh Recovery with LiDAR data](https://repository.tudelft.nl/record/uuid:7dc63e73-b793-4430-b9e0-26df378a20d9)
 
 Human Mesh Recovery (HMR) frameworks predict a comprehensive 3D mesh of an observed human based on sensor measurements.
 The majority of these frameworks are purely image-based. 
