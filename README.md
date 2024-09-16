@@ -93,7 +93,7 @@ mim install 'mmpretrain>=1.0.0'
 Run SMPLify-3D on the demo data provided in the `data/demo` directory:
 ```bash
 # Run SMPLify-3D on the demo data, predictions will be saved in the demo directory
-python hmr/smplify3d.py --config configs/demo.yaml --data data/demo/
+python hmr/smplify3d.py --config config/demo.yaml --data data/demo/
 
 # Visualize the results in 2D/3D
 python utils/smpl_annotations.py --data data/demo/ --config config/demo.yaml --ann_file data/demo/smpl_1913.json --vis_dim 3 # or 2

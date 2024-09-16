@@ -46,8 +46,9 @@ class AnnotationsSMPL:
                 "global_orient": [],
                 "global_t": [],
                 "joints3d": [],
-                "projection_errors": [],
             },
+            "reprojection_error": float(-1),
+            "chamfer_distance": float(-1),
         }
         
         if not smpl_dir.endswith("smpl"):
@@ -122,7 +123,7 @@ class AnnotationsSMPL:
         
         return img_dict
     
-    def create_annotation_dict(self, idxs: list, keypoints: list, joints3d: list, tracking_ids: list, bboxes: list, body_pose: list = None, betas: list = None, global_orient: list = None, global_t: list = None, projection_errors: list = None) -> dict:
+    def create_annotation_dict(self, idxs: list, keypoints: list, joints3d: list, tracking_ids: list, bboxes: list, body_pose: list = [], betas: list = [], global_orient: list = [], global_t: list = [], reprojection_errors: list = [], chamfer_distances: list = []) -> dict:
         """
         Create a dictionary for the annotation object within of a SMPL annotation.
         
@@ -153,7 +154,8 @@ class AnnotationsSMPL:
             ann_dict["hmr"]["betas"] = list(betas[i]) if betas != [] else self.annotation_template["hmr"]["betas"]
             ann_dict["hmr"]["global_orient"] = list(global_orient[i]) if global_orient != [] else self.annotation_template["hmr"]["global_orient"]
             ann_dict["hmr"]["global_t"] = list(global_t[i]) if global_t != [] else self.annotation_template["hmr"]["global_t"]
-            ann_dict["hmr"]["projection_errors"] = list(projection_errors[i]) if projection_errors != [] else self.annotation_template["hmr"]["projection_errors"]
+            ann_dict["reprojection_error"] = float(reprojection_errors[i]) if reprojection_errors != [] else self.annotation_template["reprojection_error"]
+            ann_dict["chamfer_distance"] = float(chamfer_distances[i]) if chamfer_distances != [] else self.annotation_template["chamfer_distance"]
             
             tracking_id = int(tracking_ids[i])
             anns[tracking_id] = ann_dict

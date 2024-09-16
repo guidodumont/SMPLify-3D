@@ -197,7 +197,7 @@ class BaseDataset(Dataset):
                                                        width=img_w,
                                                        height=img_h)
             
-            tracking_ids, body_poses, betas, global_orients, global_ts, vertices, joints3d, joints2d, bboxes, projection_errors = [], [], [], [], [], [], [], [], [], []
+            tracking_ids, body_poses, betas, global_orients, global_ts, vertices, joints3d, joints2d, bboxes, reprojection_errors, chamfer_distances = [], [], [], [], [], [], [], [], [], [], []
             for i in range(count):
                 tracking_ids.append(int(meta_info["tracking_id"][unique_idx + i]))
                 
@@ -205,7 +205,8 @@ class BaseDataset(Dataset):
                 body_poses.append(outputs["poses"][unique_idx + i, 3:].cpu().numpy().astype(float).tolist())
                 global_orients.append(outputs["poses"][unique_idx + i, :3].cpu().numpy().astype(float).tolist())
                 global_ts.append(outputs["global_t"][unique_idx + i].cpu().numpy().astype(float).tolist())
-                projection_errors.append(outputs["projection_errors"][unique_idx + i].cpu().numpy().astype(float).tolist())
+                reprojection_errors.append(outputs["reprojection_error"][unique_idx + i].cpu().numpy().astype(float).tolist())
+                chamfer_distances.append(outputs["chamfer_distance"][unique_idx + i].cpu().numpy().astype(float).tolist())
                 
                 joints3d.append(outputs["joints3d"][unique_idx + i].cpu().numpy().astype(float).tolist())
                 joints2d.append(inputs["joints2d"][unique_idx + i].cpu().numpy().astype(float).tolist())
@@ -220,7 +221,9 @@ class BaseDataset(Dataset):
                                                                     joints3d=joints3d,
                                                                     tracking_ids=tracking_ids,
                                                                     bboxes=bboxes,
-                                                                    projection_errors=projection_errors)
+                                                                    reprojection_errors=reprojection_errors,
+                                                                    chamfer_distances=chamfer_distances,
+                                                                    )
             
             if self.name == "demo":
                 save_dir = self.data_root

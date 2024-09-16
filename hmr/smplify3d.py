@@ -59,7 +59,7 @@ class SMPLify3D:
             optimization = Optimization(camera_intrinsics=camera_intrinsics, config=self.config)
             results = optimization(init_pose=cliff_poses.detach(), init_betas=cliff_betas.detach(), init_cam_t=cliff_global_t.detach(), goal_joints2d=joints2d, point_clouds=point_clouds, mask_areas=mask_areas)
     
-            new_opt_vertices, new_opt_joints, new_opt_pose, new_opt_betas, new_opt_cam_t, projection_errors = results
+            new_opt_vertices, new_opt_joints, new_opt_pose, new_opt_betas, new_opt_cam_t, reprojection_errors, chamfer_distances = results
             
             with torch.no_grad():
                 outputs = {}
@@ -67,7 +67,8 @@ class SMPLify3D:
                 outputs["betas"] = new_opt_betas
                 outputs["global_t"] = new_opt_cam_t
                 outputs["joints3d"] = new_opt_joints
-                outputs["projection_errors"] = projection_errors
+                outputs["reprojection_error"] = reprojection_errors
+                outputs["chamfer_distance"] = chamfer_distances
                 outputs["vertices"] = new_opt_vertices
     
                 # dataset.visualize_output_sample(inputs=inputs, meta_info=meta_info, outputs=outputs, targets=targets, idx=0, vis_dimensions=2)

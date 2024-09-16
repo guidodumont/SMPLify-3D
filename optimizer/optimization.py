@@ -200,16 +200,13 @@ class Optimization:
             pred_joints2d = perspective_projection(points=pred_joints3d, camera_intrinsics=self.camera_intrinsics)
 
             keypoints_distances = torch.norm(pred_joints2d - goal_joints2d, dim=-1)
-            mean_reprojection_loss = torch.mean(keypoints_distances, dim=-1) / (torch.abs(mask_areas) + 1e-9)
-            std_reprojection_loss = torch.std(keypoints_distances, dim=-1) / (torch.abs(mask_areas) + 1e-9)
-            max_distance = torch.max(keypoints_distances, dim=-1).values
-
-            reprojection_loss = torch.vstack([mean_reprojection_loss, std_reprojection_loss, max_distance]).T
+            reprojection_losses = torch.mean(keypoints_distances, dim=-1) / (torch.abs(mask_areas) + 1e-9)
+            chamfer_distances = get_3d_alignment_loss(vertices=pred_vertices, faces=self.smpl_model_neutral.faces, camera_t=pred_camera_translation, body_part_visibility=body_part_visibility_lidar, point_cloud=point_clouds, weight=1, dot_product_threshold=dot_product_threshold)
         
         final_vertices = smpl_output.vertices.detach()
         final_joints3d = vertices2joints(J_regressor=self.smpl_model_neutral.J_regressor, vertices=final_vertices)
         final_pose = torch.cat([pred_global_orient, pred_body_pose], dim=-1).detach()
         final_betas = pred_betas.detach()
         
-        return final_vertices, final_joints3d, final_pose, final_betas, pred_camera_translation, reprojection_loss
+        return final_vertices, final_joints3d, final_pose, final_betas, pred_camera_translation, reprojection_losses, chamfer_distances
     

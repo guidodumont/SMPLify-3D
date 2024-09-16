@@ -9,3 +9,4 @@ models/parametric_body_models/smpl/SMPL_FEMALE.pkl
 models/parametric_body_models/smpl/SMPL_MALE.pkl
 models/parametric_body_models/smpl/SMPL_NEUTRAL.pkl
 models/parametric_body_models/smpl/smpl_mean_params.npz
+models/cliff/
